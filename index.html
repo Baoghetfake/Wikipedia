@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mienobi Sakiu - Wikipedia</title>
     <style>
+        :root {
+            --teal-primary: #008080;
+            --teal-light: #20B2AA;
+            --teal-dark: #006666;
+            --teal-bg: #F0F8FF;
+            --text-color: #2F4F4F;
+        }
+
         * {
             box-sizing: border-box;
             font-family: 'Segoe UI', 'Liberation Sans', sans-serif;
@@ -12,66 +20,111 @@
 
         body {
             margin: 0;
-            background-color: #f6f6f6;
-            color: #202122;
+            background-color: var(--teal-bg);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             background-color: #fff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 20px;
+            box-shadow: 0 1px 8px rgba(0, 128, 128, 0.1);
+            padding: 25px;
+            border-radius: 5px;
+            border-top: 5px solid var(--teal-primary);
         }
 
         /* Header Wikipedia */
         .wiki-header {
-            border-bottom: 1px solid #a2a9b1;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        .wiki-logo {
-            width: 150px;
-            height: auto;
-            float: left;
-            margin-right: 20px;
+            border-bottom: 2px solid var(--teal-light);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
         }
         .header-title {
-            font-size: 1.8em;
-            font-weight: normal;
-            border-bottom: 1px solid transparent;
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--teal-dark);
+            margin: 0;
         }
         .header-subtitle {
-            color: #54595d;
-            font-size: 0.9em;
+            color: #5F9EA0;
+            font-size: 0.95em;
+        }
+
+        /* Tab chuyển nhân cách */
+        .personality-tabs {
+            display: flex;
+            margin: 20px 0 30px 0;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .tab {
+            padding: 12px 24px;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            margin-right: 5px;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+            color: #666;
+        }
+        .tab.active {
+            background: var(--teal-primary);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 128, 128, 0.3);
+        }
+        .tab:hover:not(.active) {
+            background: #e0f0f0;
+        }
+
+        /* Nội dung nhân cách */
+        .personality-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .personality-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Sidebar Thông tin */
         .infobox {
-            border: 1px solid #a2a9b1;
-            background-color: #f8f9fa;
-            padding: 15px;
+            border: 2px solid var(--teal-light);
+            background: linear-gradient(135deg, #f8ffff 0%, #e6f7f7 100%);
+            padding: 20px;
             float: right;
-            width: 300px;
-            margin: 0 0 15px 20px;
-            font-size: 0.875em;
+            width: 320px;
+            margin: 0 0 20px 25px;
+            font-size: 0.9em;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 128, 128, 0.1);
         }
         .infobox-title {
             text-align: center;
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            color: var(--teal-dark);
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--teal-light);
         }
         .infobox-image {
             width: 100%;
-            max-width: 250px;
+            max-width: 280px;
             display: block;
             margin: 0 auto 15px;
-            border: 1px solid #ccc;
+            border: 2px solid var(--teal-light);
+            border-radius: 5px;
         }
         .infobox-label {
             font-weight: bold;
+            color: var(--teal-dark);
             width: 40%;
             vertical-align: top;
         }
@@ -84,77 +137,122 @@
             overflow: hidden;
         }
         .section {
-            margin-bottom: 30px;
-            border-top: 1px solid #a2a9b1;
-            padding-top: 15px;
+            margin-bottom: 35px;
+            border-top: 1px solid #e0f0f0;
+            padding-top: 20px;
         }
         .section-title {
-            font-size: 1.5em;
-            font-weight: normal;
-            color: #000;
+            font-size: 1.6em;
+            font-weight: bold;
+            color: var(--teal-dark);
             margin-top: 0;
+            padding-bottom: 8px;
+            border-bottom: 2px dotted var(--teal-light);
         }
         .subsection-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-top: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 20px;
+            color: var(--teal-primary);
         }
 
         /* Bảng thuật thức */
         .ability-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
+            margin: 20px 0;
+            border: 1px solid var(--teal-light);
+            border-radius: 8px;
+            overflow: hidden;
         }
         .ability-table th, .ability-table td {
-            border: 1px solid #a2a9b1;
-            padding: 10px;
+            border: 1px solid var(--teal-light);
+            padding: 12px 15px;
             vertical-align: top;
         }
         .ability-table th {
-            background-color: #eaecf0;
+            background: linear-gradient(to right, var(--teal-primary), var(--teal-light));
+            color: white;
             text-align: left;
+        }
+        .ability-table tr:nth-child(even) {
+            background-color: #f8ffff;
         }
 
         /* Điểm nhấn màu sắc theo chủ đề */
         .name-highlight {
-            color: #cc0000;
+            color: var(--teal-dark);
             font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 128, 128, 0.1);
         }
-        .blue-eye {
-            color: #1e6bb8;
+        .wind-element {
+            color: #2E8B57;
             font-weight: bold;
+            background: linear-gradient(90deg, #E0F7FA, #B2EBF2);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
         .domain {
-            color: #2a4b8d;
+            color: var(--teal-dark);
             font-weight: bold;
+            border-left: 4px solid var(--teal-primary);
+            padding-left: 10px;
+            background-color: #F0F8FF;
         }
         .note {
             font-style: italic;
-            color: #54595d;
-            border-left: 3px solid #a2a9b1;
-            padding-left: 10px;
-            margin: 10px 0;
+            color: #5F9EA0;
+            border-left: 3px solid var(--teal-light);
+            padding: 12px 15px;
+            margin: 15px 0;
+            background-color: #F8FFFF;
+            border-radius: 0 5px 5px 0;
+        }
+        .personality-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: var(--teal-primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* Đặc điểm nhân cách 2 */
+        .calm-trait {
+            background-color: #E8F4F4;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid var(--teal-primary);
+            margin: 15px 0;
         }
 
         footer {
-            margin-top: 30px;
-            border-top: 1px solid #a2a9b1;
-            padding-top: 15px;
-            font-size: 0.8em;
-            color: #54595d;
+            margin-top: 40px;
+            border-top: 2px solid var(--teal-light);
+            padding-top: 20px;
+            font-size: 0.85em;
+            color: #5F9EA0;
             text-align: center;
+            clear: both;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .infobox {
                 float: none;
                 width: 100%;
-                margin: 0 0 20px 0;
+                margin: 0 0 25px 0;
             }
             .container {
-                padding: 10px;
+                padding: 15px;
+            }
+            .personality-tabs {
+                flex-wrap: wrap;
+            }
+            .tab {
+                margin-bottom: 5px;
             }
         }
     </style>
@@ -163,84 +261,177 @@
     <div class="container">
         <header class="wiki-header">
             <div class="header-title">Mienobi Sakiu (ミエノビ・サキウ)</div>
-            <div class="header-subtitle">Bách khoa toàn thư mở Wikipedia</div>
+            <div class="header-subtitle">Bách khoa toàn thư mở Wikipedia - Nhân vật đa nhân cách</div>
         </header>
 
-        <aside class="infobox">
-            <div class="infobox-title">Mienobi Sakiu</div>
-            <img src="https://via.placeholder.com/250x350/1e6bb8/ffffff?text=Sakiu+Concept" alt="Mienobi Sakiu Concept Art" class="infobox-image">
-            <table>
-                <tr><td class="infobox-label">Tên đầy đủ</td><td class="infobox-data">Mienobi Sakiu</td></tr>
-                <tr><td class="infobox-label">Giới tính</td><td class="infobox-data">Nam</td></tr>
-                <tr><td class="infobox-label">Cấp bậc</td><td class="infobox-data">Chú Thuật Sư Đặc Cấp</td></tr>
-                <tr><td class="infobox-label">Thứ hạng</td><td class="infobox-data">Dưới Gojo Satoru và Sukuna, ngang Yuta Okkotsu trong tiềm năng</td></tr>
-                <tr><td class="infobox-label">Gia tộc</td><td class="infobox-data">Mienobi</td></tr>
-                <tr><td class="infobox-label">Xuất hiện</td><td class="infobox-data">Jujutsu Kaisen (Hư cấu)</td></tr>
-            </table>
-        </aside>
+        <!-- Tab chuyển đổi nhân cách -->
+        <div class="personality-tabs">
+            <button class="tab active" onclick="switchPersonality(1)">Nhân cách 1: Lam Nhãn</button>
+            <button class="tab" onclick="switchPersonality(2)">Nhân cách 2: Phong Tĩnh</button>
+        </div>
 
-        <main class="content">
-            <p><span class="name-highlight">Mienobi Sakiu (ミエノビ・サキウ)</span> là một nhân vật hư cấu trong vũ trụ Jujutsu Kaisen. Là một Chú Thuật Sư Đặc Cấp với đôi <span class="blue-eye">Lam Nhãn</span> hiếm có, hắn sở hữu sức mạnh khủng khiếp và một tính cách cực đoan, phức tạp. Mối quan hệ của hắn với Gojo Satoru và sự kiện liên quan đến Geto Suguru đã khiến hắn trở thành một nhân tố bất ổn và đầy bi kịch trong thế giới Chú Thuật.</p>
-
-            <section class="section" id="appearance">
-                <h2 class="section-title">Ngoại hình và Tính cách</h2>
-                <h3 class="subsection-title">Ngoại hình</h3>
-                <p>Sakiu có thân hình cao, gọn cơ. Mái tóc đen ánh đỏ dài thường được buộc lỏng. Đặc điểm nổi bật nhất là đôi <span class="blue-eye">Lam Nhãn (藍眼, Ran-gan)</span> xanh rực rỡ, thường xuyên bị che bởi một chiếc khăn vải màu xanh đen để hạn chế sức mạnh và tránh sự chú ý.</p>
-                <h3 class="subsection-title">Tính cách</h3>
-                <p>Sakiu mang bản tính kiêu ngạo, máu lạnh và cực đoan. Hắn thừa hưởng bản năng "Sadomasochism" (SM) từ dòng máu gia tộc Mienobi: cảm giác đau đớn kích hoạt khoái cảm và làm tăng cường độ chú lực. Điều này khiến hắn thường xuyên lao vào những trận chiến đẫm máu, biến chúng thành một màn "thí nghiệm máu" vừa hành hạ đối thủ vừa tự hành hạ bản thân.</p>
-            </section>
-
-            <section class="section" id="abilities">
-                <h2 class="section-title">Năng lực Chú Thuật</h2>
-                <p>Là một Chú Thuật Sư Đặc Cấp, Sakiu sở hữu lượng chú lực khổng lồ và trình độ kỹ thuật đỉnh cao.</p>
-
-                <h3 class="subsection-title">Thuật thức bẩm sinh: Lam Nhãn (藍眼, Ran-gan)</h3>
-                <table class="ability-table">
-                    <tr>
-                        <th width="30%">Kỹ năng</th>
-                        <th>Mô tả</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Thấu Thị</strong></td>
-                        <td>Nhìn thấy rõ ràng cấu trúc cơ thể, dòng chảy chú lực, và loại bỏ hoàn toàn khái niệm "điểm mù".</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Đọc Động Tác</strong></td>
-                        <td>Mọi cử động của đối thủ đều hiển thị trước một "khung hình dự đoán", cho phép Sakiu phản ứng nhanh hơn một bước.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Quả Cầu Lam (蒼玉球, Sō-gyoku)</strong></td>
-                        <td>Kỹ thuật tấn công chính. Nén chú lực thành những quả cầu năng lượng màu xanh da trời với hai hình thái:
-                            <ul>
-                                <li><strong>Nổ bùng:</strong> Hủy diệt phạm vi rộng.</li>
-                                <li><strong>Xuyên thấu:</strong> Phóng thẳng vào nội tạng đối phương để phá hủy từ bên trong.</li>
-                            </ul>
-                        </td>
-                    </tr>
+        <!-- Nhân cách 1: Lam Nhãn -->
+        <div id="personality1" class="personality-content active">
+            <aside class="infobox">
+                <div class="infobox-title">Mienobi Sakiu - Lam Nhãn</div>
+                <img src="https://via.placeholder.com/280x350/1e6bb8/ffffff?text=Sakiu+Blue+Eyes" alt="Mienobi Sakiu - Lam Nhãn" class="infobox-image">
+                <table>
+                    <tr><td class="infobox-label">Tên đầy đủ</td><td class="infobox-data">Mienobi Sakiu</td></tr>
+                    <tr><td class="infobox-label">Giới tính</td><td class="infobox-data">Nam</td></tr>
+                    <tr><td class="infobox-label">Cấp bậc</td><td class="infobox-data">Chú Thuật Sư Đặc Cấp</td></tr>
+                    <tr><td class="infobox-label">Thứ hạng</td><td class="infobox-data">Dưới Gojo và Sukuna, ngang Yuta trong tiềm năng</td></tr>
+                    <tr><td class="infobox-label">Gia tộc</td><td class="infobox-data">Mienobi</td></tr>
+                    <tr><td class="infobox-label">Trạng thái</td><td class="infobox-data">Kiêu ngạo, máu lạnh, cực đoan</td></tr>
                 </table>
+            </aside>
 
-                <h3 class="subsection-title">Kỹ năng bổ trợ</h3>
-                <p><strong>Phản Chuyển Thuật Thức:</strong> Khả năng phục hồi vượt trội nhờ vào sự quan sát chính xác tuyệt đối của Lam Nhãn, cho phép tái tạo cả nội tạng bị tổn thương.</p>
-                <p><strong>Thể Thuật:</strong> Trình độ cận chiến đạt cực đại, với tốc độ và phản xạ siêu phàm. Hắn gần như không thể bị đánh trúng trừ khi tự nguyện hứng đòn.</p>
+            <main class="content">
+                <p><span class="name-highlight">Mienobi Sakiu (ミエノビ・サキウ)</span> là một nhân vật hư cấu trong vũ trụ Jujutsu Kaisen. Ở nhân cách này, hắn là một Chú Thuật Sư Đặc Cấp với đôi <span class="wind-element">Lam Nhãn</span> hiếm có, sở hữu sức mạnh khủng khiếp và một tính cách cực đoan, phức tạp.</p>
 
-                <h3 class="subsection-title">Lãnh Địa Triển Khai: <span class="domain">Cá Voi Sát Thủ (殺鯨界, Satsu Gei-kai)</span></h3>
-                <p>Một lãnh địa có hình thái của đại dương tối. Mặt đất biến thành biển đen, từ đó những con cá voi sát thủ bằng chú lực phóng lên cắn xé cả thể xác lẫn chú lực của kẻ địch. Trung tâm lãnh địa là một cột nước lam khổng lồ, trên đỉnh có ngai lam thạch nơi Sakiu ngự trị. Trong lãnh địa, <span class="blue-eye">Lam Nhãn</span> hiển thị toàn bộ chuyển động của mục tiêu, dẫn dắt đàn cá voi tấn công chính xác như một cuộc đi săn. Sakiu miễn nhiễm với sát thương trong lãnh địa của chính mình, nhưng thường cố tình hứng chịu một phần đòn tấn công để kích thích khoái cảm và tăng sức mạnh.</p>
-            </section>
+                <section class="section" id="appearance1">
+                    <h2 class="section-title">Ngoại hình và Tính cách</h2>
+                    <h3 class="subsection-title">Ngoại hình</h3>
+                    <p>Cao, gọn cơ, tóc đen ánh đỏ dài buộc lỏng. Đặc điểm nổi bật là đôi <span class="wind-element">Lam Nhãn (藍眼, Ran-gan)</span> xanh rực rỡ, thường xuyên bị che bởi một chiếc khăn vải màu xanh đen.</p>
+                    <h3 class="subsection-title">Tính cách</h3>
+                    <p>Kiêu ngạo, máu lạnh, cực đoan. Bản năng SM xuất phát từ dòng máu gia tộc Mienobi: đau đớn kích hoạt khoái cảm và làm tăng chú lực. Thường chiến đấu trong trạng thái vừa hành hạ vừa tự hành hạ, biến trận chiến thành một màn "thí nghiệm máu."</p>
+                    <div class="calm-trait">
+                        <span class="personality-tag">Kiêu ngạo</span>
+                        <span class="personality-tag">Máu lạnh</span>
+                        <span class="personality-tag">Cực đoan</span>
+                        <span class="personality-tag">Sadomasochism</span>
+                    </div>
+                </section>
 
-            <section class="section" id="history">
-                <h2 class="section-title">Quá khứ và Vai trò</h2>
-                <p>Xuất thân từ gia tộc Mienobi bí ẩn, nơi cứ mỗi 100 năm mới có một đứa trẻ sở hữu <span class="blue-eye">Lam Nhãn</span>. Những đứa trẻ này buộc phải che mắt từ nhỏ để tránh bị các thế lực trong và ngoài thế giới Chú Thuật săn lùng.</p>
-                <p class="note">Điểm tương đồng đáng chú ý: Cả Gojo Satoru (che Lục Nhãn) và Sakiu (che Lam Nhãn) đều phải bịt mắt vì lý do giống nhau. Họ thậm chí có thể trao đổi khăn bịt mắt cho nhau, trở thành một chi tiết thể hiện sự thấu hiểu độc nhất giữa hai thiên tài cô độc.</p>
-                <p>Sakiu trở thành bạn thân của Gojo sau sự kiện Toji Fushiguro. Tuy nhiên, bi kịch lớn xảy ra khi Geto Suguru sa ngã. Trong một hành động được hắn gọi là "món quà giải thoát", Sakiu đã giết chết Geto trước khi Gojo có cơ hội hành động. Hành động tưởng chừng như khắc nghiệt này vô tình tạo điều kiện cho Kenjaku nhập xác Geto, gieo mầm cho những thảm họa sau này.</p>
-                <p>Hiện tại, Mienobi Sakiu tồn tại như một Chú Thuật Sư Đặc Cấp bị người trong giới vừa kính sợ vừa e ngại. Hắn là một đồng minh bất đắc dĩ nhưng cũng là đối thủ ngầm của Gojo Satoru, một nhân tố không thể đoán định trong cán cân sức mạnh của thế giới Chú Thuật.</p>
-            </section>
-        </main>
+                <section class="section" id="abilities1">
+                    <h2 class="section-title">Năng lực Chú Thuật</h2>
+                    <h3 class="subsection-title">Thuật thức bẩm sinh: Lam Nhãn (藍眼, Ran-gan)</h3>
+                    <table class="ability-table">
+                        <tr>
+                            <th width="30%">Kỹ năng</th>
+                            <th>Mô tả</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Thấu Thị</strong></td>
+                            <td>Nhìn thấy rõ ràng cấu trúc cơ thể, dòng chảy chú lực, và loại bỏ hoàn toàn khái niệm "điểm mù".</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Đọc Động Tác</strong></td>
+                            <td>Mọi cử động của đối thủ đều hiển thị trước một "khung hình dự đoán", cho phép Sakiu phản ứng nhanh hơn một bước.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quả Cầu Lam (蒼玉球, Sō-gyoku)</strong></td>
+                            <td>Nén chú lực thành những quả cầu năng lượng màu xanh da trời với hai hình thái:
+                                <ul>
+                                    <li><strong>Nổ bùng:</strong> Hủy diệt phạm vi rộng.</li>
+                                    <li><strong>Xuyên thấu:</strong> Phóng thẳng vào nội tạng đối phương để phá hủy từ bên trong.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h3 class="subsection-title">Lãnh Địa Triển Khai: <span class="domain">Cá Voi Sát Thủ (殺鯨界, Satsu Gei-kai)</span></h3>
+                    <p>Mặt đất hóa biển đen, cá voi sát thủ phóng lên cắn xé cả thân thể và chú lực địch. Trung tâm: Cột nước lam khổng lồ, trên đỉnh có ngai lam thạch. Sakiu miễn nhiễm, nhưng vẫn cố tình hứng đòn để tăng khoái cảm.</p>
+                </section>
+
+                <section class="section" id="history1">
+                    <h2 class="section-title">Quá khứ và Vai trò</h2>
+                    <p>Gia tộc Mienobi: mỗi 100 năm mới có một Lam Nhãn. Khi xuất hiện, đứa trẻ buộc phải che mắt để tránh bị săn. Gojo và Sakiu cùng bịt mắt vì cùng lý do: Gojo che Lục Nhãn, Sakiu che Lam Nhãn. Hai người thậm chí có thể đổi khăn cho nhau.</p>
+                    <p class="note">Điểm tương đồng đáng chú ý: Cả Gojo Satoru (che Lục Nhãn) và Sakiu (che Lam Nhãn) đều phải bịt mắt vì lý do giống nhau.</p>
+                    <p>Bạn thân của Gojo sau biến cố Toji. Khi Geto sa ngã, Sakiu chính tay giết hắn trước cả Gojo, gọi đó là "món quà giải thoát." Vô tình mở đường cho Kenjaku nhập xác Geto, tạo bi kịch. Hiện tại: Kẻ đặc cấp bị kính sợ, vừa đồng minh bất đắc dĩ vừa đối thủ ngầm của Gojo.</p>
+                </section>
+            </main>
+        </div>
+
+        <!-- Nhân cách 2: Phong Tĩnh -->
+        <div id="personality2" class="personality-content">
+            <aside class="infobox">
+                <div class="infobox-title">Mienobi Sakiu - Phong Tĩnh</div>
+                <img src="https://via.placeholder.com/280x350/008080/ffffff?text=Sakiu+Calm+Wind" alt="Mienobi Sakiu - Phong Tĩnh" class="infobox-image">
+                <table>
+                    <tr><td class="infobox-label">Tên đầy đủ</td><td class="infobox-data">Mienobi Sakiu</td></tr>
+                    <tr><td class="infobox-label">Giới tính</td><td class="infobox-data">Nam</td></tr>
+                    <tr><td class="infobox-label">Danh hiệu</td><td class="infobox-data">Phong Tĩnh Chi Ảnh (風静の影)</td></tr>
+                    <tr><td class="infobox-label">Hệ linh lực</td><td class="infobox-data">Tĩnh Phong (静風)</td></tr>
+                    <tr><td class="infobox-label">Chiều cao</td><td class="infobox-data">1m82</td></tr>
+                    <tr><td class="infobox-label">Trạng thái</td><td class="infobox-data">Điềm đạm, kiệm lời, quan sát sâu</td></tr>
+                </table>
+            </aside>
+
+            <main class="content">
+                <p><span class="name-highlight">Mienobi Sakiu - Phong Tĩnh Chi Ảnh</span> là nhân cách thứ 2, biểu hiện khi hệ <span class="wind-element">Tĩnh Phong</span> chiếm ưu thế. Ở trạng thái này, Sakiu trở nên điềm đạm, kiểm soát hoàn toàn cảm xúc và sức mạnh chú thuật.</p>
+
+                <section class="section" id="appearance2">
+                    <h2 class="section-title">Ngoại hình và Tính cách</h2>
+                    <h3 class="subsection-title">Ngoại hình</h3>
+                    <p>Tóc trắng bạc, mắt xám tro, da nhạt. Cao 1m82, dáng gầy, vai rộng. Thường mặc sơ mi đen, khoác áo dài ngoài như áo thầy trừ tà cũ. Mặt bình thản kiểu "chẳng có gì đáng ngạc nhiên trên đời này cả."</p>
+                    <h3 class="subsection-title">Tính cách</h3>
+                    <p>Điềm đạm, kiệm lời, nhưng có xu hướng quan sát sâu. Khi chiến đấu thì lạnh, khi ở đời thường thì hơi… buồn ngủ. Thích yên tĩnh, ghét ồn ào, đặc biệt dị ứng với những kẻ thích khoe sức mạnh. Có quan điểm rõ ràng: "Chú thuật là gánh nặng, không phải đặc quyền."</p>
+                    <div class="calm-trait">
+                        <span class="personality-tag">Điềm đạm</span>
+                        <span class="personality-tag">Kiệm lời</span>
+                        <span class="personality-tag">Quan sát sâu</span>
+                        <span class="personality-tag">Ghét ồn ào</span>
+                    </div>
+                </section>
+
+                <section class="section" id="abilities2">
+                    <h2 class="section-title">Năng lực Chú Thuật: Tĩnh Phong (静風)</h2>
+                    <p>Thuộc tính điều khiển dòng khí trong không gian, khiến chuyển động của năng lượng chú bị "ngắt", như thể thế giới bị ngừng lại một nhịp.</p>
+                    
+                    <h3 class="subsection-title">Kỹ năng đặc biệt</h3>
+                    <table class="ability-table">
+                        <tr>
+                            <th width="30%">Kỹ năng</th>
+                            <th>Mô tả</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Phong Giới (風結界)</strong></td>
+                            <td>Tạo một kết giới gió tĩnh làm sai lệch cảm giác thời gian của đối thủ.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phong Vũ Trảm</strong></td>
+                            <td>Dùng khí lưu để chém xuyên cả lớp kết giới của đối phương.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bản năng chú thuật</strong></td>
+                            <td>Cực kỳ tiết chế – càng bình tĩnh, chú lực càng mạnh. Trạng thái tâm trí ảnh hưởng trực tiếp đến sức mạnh.</td>
+                        </tr>
+                    </table>
+
+                    <h3 class="subsection-title">Domain Expansion: <span class="domain">静風結界 – Seifu Kekkai (Kết Giới Phong Tĩnh)</span></h3>
+                    <p><strong>Bán kính:</strong> 70 mét<br>
+                    <strong>Thời gian duy trì tối đa:</strong> 3 phút 47 giây (ghi nhận lâu nhất bởi Kyoto HQ)<br>
+                    <strong>Loại Domain:</strong> Định hình không gian, ổn định chú lực tuyến tính, ưu tiên kiểm soát dòng chuyển động.</p>
+                    
+                    <h4>Hiệu ứng:</h4>
+                    <ul>
+                        <li>Tất cả dao động trong không gian Domain bị giảm biên độ 90%.</li>
+                        <li>Mọi âm thanh, rung động, sóng linh lực đều bị "nén" lại.</li>
+                        <li>Tầm nhìn bị bóp méo do chênh lệch áp suất khiến ánh sáng bị bẻ cong.</li>
+                        <li>Sakiu được khuếch đại 400% hiệu suất kiểm soát chú lực.</li>
+                    </ul>
+                    
+                    <h4>Chiêu chủ lực trong Domain:</h4>
+                    <p><strong>「静斬・風牙 (Seizan – Phong Nha Trảm)」</strong><br>
+                    Lưỡi khí vô hình xuất phát từ các hướng khác nhau, dựa vào biến động áp suất. Cảm giác với đối phương giống như bị hàng chục nhát chém từ hư không ập đến cùng lúc.</p>
+                </section>
+
+                <section class="section" id="history2">
+                    <h2 class="section-title">Danh tiếng và Ảnh hưởng</h2>
+                    <p>Sakiu được mệnh danh <strong>"Phong Tĩnh Chi Ảnh (風静の影)"</strong> – kẻ khiến cả nguyền hồn phải lặng đi một nhịp trước khi bị xóa sổ. Nhưng điều khiến người khác sợ hơn là ánh mắt cậu: không căm ghét, không thương xót, chỉ đơn thuần trống rỗng.</p>
+                    
+                    <p class="note">"Cậu ấy không chiến đấu với sự cuồng nhiệt hay tàn bạo, mà với sự chính xác của một nhà khoa học đang thí nghiệm. Đó là điều đáng sợ nhất - sự lạnh lùng hoàn hảo." - Nhận xét từ một Chú Thuật Sư cấp 1.</p>
+                    
+                    <p>Trong thế giới chú thuật, Sakiu tồn tại như một ẩn số. Không thuộc phe nào hoàn toàn, không theo đuổi quyền lực, chỉ hành động theo logic riêng của mình. Một số cho rằng đây là cơ chế tự bảo vệ của một tâm hồn đã chứng kiến quá nhiều bi kịch.</p>
+                </section>
+            </main>
+        </div>
 
         <footer>
-            <p>Trang này là một bài viết giả lập về nhân vật hư cấu Mienobi Sakiu, được tạo ra cho mục đích minh họa.</p>
-            <p>Dựa trên thông tin từ vũ trụ Jujutsu Kaisen của Gege Akutami.</p>
-            <p>Ngày cập nhật: Tháng 4, 2024</p>
+            <p>Trang này là một bài viết giả lập về nhân vật hư cấu Mienobi Sakiu (phiên bản đa nhân cách), được tạo ra cho mục đích minh họa.</p>
+            <p>Dựa trên thông tin từ vũ trụ Jujutsu Kaisen của Gege Akutami và ý tưởng nhân vật đa nhân cách.</p>
+            <p>Ngày cập nhật: Tháng 4, 2024 | Chủ đề: Teal</p>
         </footer>
     </div>
-</body>
-</html>
+
+    <script
