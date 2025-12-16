@@ -266,8 +266,8 @@
 
         <!-- Tab chuyển đổi nhân cách -->
         <div class="personality-tabs">
-            <button class="tab active" onclick="switchPersonality(1)">Nhân cách 1: Lam Nhãn</button>
-            <button class="tab" onclick="switchPersonality(2)">Nhân cách 2: Phong Tĩnh</button>
+            <button class="tab active" data-personality="1">Nhân cách 1: Lam Nhãn</button>
+            <button class="tab" data-personality="2">Nhân cách 2: Phong Tĩnh</button>
         </div>
 
         <!-- Nhân cách 1: Lam Nhãn -->
@@ -434,4 +434,50 @@
         </footer>
     </div>
 
-    <script
+    <script>
+        // Đảm bảo DOM đã load xong
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lấy tất cả các tab
+            const tabs = document.querySelectorAll('.tab');
+            
+            // Thêm sự kiện click cho mỗi tab
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const personalityId = this.getAttribute('data-personality');
+                    switchPersonality(personalityId);
+                });
+            });
+            
+            console.log('Trang Wikipedia Mienobi Sakiu đã sẵn sàng!');
+        });
+
+        function switchPersonality(personalityId) {
+            console.log('Đang chuyển sang nhân cách:', personalityId);
+            
+            // Ẩn tất cả nội dung
+            document.querySelectorAll('.personality-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Hiện nội dung được chọn
+            const targetContent = document.getElementById('personality' + personalityId);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+            
+            // Cập nhật tab active
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            const activeTab = document.querySelector('.tab[data-personality="' + personalityId + '"]');
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            // Cuộn lên đầu trang (tuỳ chọn)
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+                                                                                                                                                               </html>
